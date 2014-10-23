@@ -1,6 +1,7 @@
 package main
 
 import (
+  "os"
   "fmt"
   "log"
   "time"
@@ -42,7 +43,7 @@ func main() {
 
   opts := MQTT.NewClientOptions()
 
-  brokerUri := fmt.Sprintf("tcp://%s:%d", host, port)
+  brokerUri := fmt.Sprintf("tcp://%s:%d", mqtt_server_addr, port)
   opts.AddBroker(brokerUri)
 
   client := MQTT.NewClient(opts)

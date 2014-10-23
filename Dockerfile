@@ -27,7 +27,7 @@ WORKDIR /opt/mqtt-client
 ADD pub.go /opt/mqtt-client/pub.go
 RUN go build /opt/mqtt-client/pub.go
 
-ADD pub.go /opt/mqtt-client/sub.go
+ADD sub.go /opt/mqtt-client/sub.go
 RUN go build /opt/mqtt-client/sub.go
 
 CMD [ "/opt/mqtt-client/sub" ]
