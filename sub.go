@@ -18,11 +18,11 @@ func onMessageReceived(client *MQTT.MqttClient, message MQTT.Message) {
 
   if g_sub_counter == 1 {
     g_start_time = time.Now().UnixNano()
-    fmt.Println("start time : %d ns", g_start_time)
+    fmt.Printf("start time : %d ns\n", g_start_time)
   } else if g_sub_counter == 100000 {
     g_end_time = time.Now().UnixNano()
-    fmt.Println("  end time : %d ns", g_end_time)
-    fmt.Println("delta time : %d ns", g_end_time - g_start_time)
+    fmt.Printf("  end time : %d ns\n", g_end_time)
+    fmt.Printf("delta time : %d ns\n", g_end_time - g_start_time)
   }
 
   // fmt.Printf("Received message on topic: %s\n", message.Topic())
