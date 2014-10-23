@@ -4,10 +4,16 @@ import (
   "os"
   "fmt"
   "log"
+  "time"
+
   MQTT "git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.golang.git"
 )
 
 var PUBLISH_CNT int = 100000
+var g_pub_counter int = 0
+var g_start_time int64 = 0
+var g_end_time int64 = 0
+
 
 func Publish(client *MQTT.MqttClient, cnt int) error {
   topic := "my/topic/string"
@@ -16,6 +22,16 @@ func Publish(client *MQTT.MqttClient, cnt int) error {
 
   result := client.Publish(MQTT.QoS(qos), topic, message)
   <-result
+
+  g_pub_counter += 1
+  if g_pub_counter == 1 {
+    g_start_time = time.Now().UnixNano()
+    fmt.Printf("start time : %d ns\n", g_start_time)
+  } else if g_pub_counter == PUBLISH_CNT {
+    g_end_time = time.Now().UnixNano()
+    fmt.Printf("  end time : %d ns\n", g_end_time)
+    fmt.Printf("delta time : %d ns\n", g_end_time - g_start_time)
+  }
 
   return nil
 }
