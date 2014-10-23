@@ -9,9 +9,24 @@ import (
   MQTT "git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.golang.git"
 )
 
+var g_sub_counter int = 0
+var g_start_time int64 = 0
+var g_end_time int64 = 0
+
 func onMessageReceived(client *MQTT.MqttClient, message MQTT.Message) {
-  fmt.Printf("Received message on topic: %s\n", message.Topic())
-  fmt.Printf("Message: %s\n", message.Payload())
+  g_sub_counter += 1
+
+  if g_sub_counter == 1 {
+    g_start_time = time.Now().UnixNano()
+    fmt.Println("start time : %d ns", g_start_time)
+  } else if g_sub_counter == 100000 {
+    g_end_time = time.Now().UnixNano()
+    fmt.Println("  end time : %d ns", g_end_time)
+    fmt.Println("delta time : %d ns", g_end_time - g_start_time)
+  }
+
+  // fmt.Printf("Received message on topic: %s\n", message.Topic())
+  // fmt.Printf("Message: %s\n", message.Payload())
 }
 
 func Subscribe(client *MQTT.MqttClient) error {
