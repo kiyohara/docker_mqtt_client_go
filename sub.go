@@ -9,6 +9,7 @@ import (
   MQTT "git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.golang.git"
 )
 
+var SUBSCRIBE_CNT = 1000000
 var g_sub_counter int = 0
 var g_start_time int64 = 0
 var g_end_time int64 = 0
@@ -19,7 +20,7 @@ func onMessageReceived(client *MQTT.MqttClient, message MQTT.Message) {
   if g_sub_counter == 1 {
     g_start_time = time.Now().UnixNano()
     fmt.Printf("start time : %d ns\n", g_start_time)
-  } else if g_sub_counter == 100000 {
+  } else if g_sub_counter == SUBSCRIBE_CNT {
     g_end_time = time.Now().UnixNano()
     fmt.Printf("  end time : %d ns\n", g_end_time)
     fmt.Printf("delta time : %d ns\n", g_end_time - g_start_time)

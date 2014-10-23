@@ -9,7 +9,7 @@ import (
   MQTT "git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.golang.git"
 )
 
-var PUBLISH_CNT int = 100000
+var PUBLISH_CNT int = 1000000
 var g_pub_counter int = 0
 var g_start_time int64 = 0
 var g_end_time int64 = 0
