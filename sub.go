@@ -51,7 +51,9 @@ func Subscribe(client *MQTT.MqttClient) error {
 }
 
 func main() {
-  runtime.GOMAXPROCS(runtime.NumCPU())
+  num_cpu := runtime.NumCPU()
+  runtime.GOMAXPROCS(num_cpu)
+  fmt.Println("GOMAXPROCS =", num_cpu)
 
   mqtt_server_addr := os.Getenv("MQTT_SERVER_ADDR")
   if mqtt_server_addr == "" {
