@@ -5,6 +5,7 @@ import (
   "fmt"
   "log"
   "time"
+  "runtime"
 
   MQTT "git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.golang.git"
 )
@@ -50,6 +51,8 @@ func Subscribe(client *MQTT.MqttClient) error {
 }
 
 func main() {
+  runtime.GOMAXPROCS(runtime.NumCPU())
+
   mqtt_server_addr := os.Getenv("MQTT_SERVER_ADDR")
   if mqtt_server_addr == "" {
     mqtt_server_addr = "localhost"
